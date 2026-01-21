@@ -1,0 +1,25 @@
+name: Pull Request Test
+
+
+on:
+    pull_request:
+        branches:
+        - main
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v3
+        - name: Run springboot Tests
+          uses: actions/setup-java@v3
+          with:
+            distribution: "JDK"
+            java-version: latest
+        - run: mvn test -Dspring.profiles.active=test
+
+        # tests for front end to be set up later
+
+
+
