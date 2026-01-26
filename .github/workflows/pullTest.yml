@@ -7,19 +7,41 @@ on:
         - main
 
 jobs:
-    test:
+    backend-test:
         runs-on: ubuntu-latest
 
         steps:
         - uses: actions/checkout@v3
+
         - name: Run springboot Tests
           uses: actions/setup-java@v3
           with:
             distribution: "JDK"
             java-version: latest
-        - run: mvn test -Dspring.profiles.active=test
+        
+        - name: Run Spring Boot tests
+          run: mvn test -Dspring.profiles.active=test
 
-        # tests for front end to be set up later
+    mobile-test:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v3
+        
+        - name: Run mobile Tests
+          uses: actions/setup-node@v3
+          with:
+            node-version: '18'
+            cache: 'npm'
+            cache-dependency-path: mobile/package-lock.json
+        
+        - name: Install dependencies
+          working-directory: ./mobile
+          run: npm ci
+        
+        - name: Run tests
+          working-directory: ./mobile
+          run: npm test
 
 
 
