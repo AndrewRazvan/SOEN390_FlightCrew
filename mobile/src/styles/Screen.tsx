@@ -1,11 +1,21 @@
-import { StyleSheet, ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
-const styles: { screen: ViewStyle } = StyleSheet.create({
+const styles = StyleSheet.create({
   screen: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  textContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  mapWrapper: {
+    flex: 1,
   },
 });
 
