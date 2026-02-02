@@ -2,26 +2,20 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
-      - dev
+    branches: [main, dev]
   pull_request:
-    branches:
-      - main
-      - dev
-      - feat/**
+    branches: [main, dev, "feat/**"]
 
 jobs:
   backend-test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Run springboot Tests
-        uses: actions/setup-java@v3
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
+          distribution: temurin
           java-version: "21"
           cache: maven
 
@@ -31,15 +25,14 @@ jobs:
 
   mobile-test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Run mobile Tests
-        uses: actions/setup-node@v3
+      - name: Set up Node
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: "npm"
+          node-version: "20"
+          cache: npm
           cache-dependency-path: mobile/package-lock.json
 
       - name: Install dependencies
@@ -48,7 +41,7 @@ jobs:
 
       - name: Run lint
         working-directory: ./mobile
-        run: npm run lint
+        run: npm run lint:ci
 
       - name: Run tests
         working-directory: ./mobile
