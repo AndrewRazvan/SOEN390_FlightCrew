@@ -1,8 +1,8 @@
 import React from "react";
 import { Marker } from "react-native-maps";
 import Svg, { Circle, Path } from "react-native-svg";
-import { Building } from "../../types/Building";
 import { COLORS, MAP_CONFIG } from "../../constants";
+import { Building } from "../../types/Building";
 
 interface BuildingMarkerProps {
   readonly building: Building;
