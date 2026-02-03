@@ -14,7 +14,9 @@ export const useBuildingData = () => {
       const data = await BuildingDataService.fetchBuildings();
       setBuildings(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to fetch buildings");
+      setError(
+        err instanceof Error ? err.message : "Failed to fetch buildings",
+      );
     } finally {
       setLoading(false);
     }

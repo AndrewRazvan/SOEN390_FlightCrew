@@ -13,7 +13,7 @@ export class BuildingDataService {
       }
 
       const data = await response.json();
-      
+
       return data.map((building: any) => ({
         campus: building.Campus,
         buildingCode: building.Building,
@@ -25,8 +25,13 @@ export class BuildingDataService {
       }));
     } catch (error) {
       console.error("Error fetching buildings:", error);
-      if (error instanceof TypeError && error.message.includes("Network request failed")) {
-        throw new Error("Cannot connect to server. Make sure the backend is running on port 9090.");
+      if (
+        error instanceof TypeError &&
+        error.message.includes("Network request failed")
+      ) {
+        throw new Error(
+          "Cannot connect to server. Make sure the backend is running on port 9090.",
+        );
       }
       throw error;
     }

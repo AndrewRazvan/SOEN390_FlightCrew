@@ -18,8 +18,8 @@ export const COLORS = {
 // API Configuration
 export const API_CONFIG = {
   getBaseUrl: () => {
-    return Platform.OS === "android" 
-      ? "http://10.0.2.2:9090/api" 
+    return Platform.OS === "android"
+      ? "http://10.0.2.2:9090/api"
       : "http://localhost:9090/api";
   },
 };
