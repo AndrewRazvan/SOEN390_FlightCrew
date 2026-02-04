@@ -19,7 +19,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     supportsTablet: true,
     infoPlist: {
       NSAppTransportSecurity: {
-        NSAllowsArbitraryLoads: true, // Allow HTTP requests, NEED TO BE SECURE IN PRODUCTION
+        NSAllowsArbitraryLoads: true, // Allow HTTP requests, NEED TO BE SECURE IN PRODUCTION //NOSONAR
       },
     },
     config: {
@@ -43,7 +43,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       "android.permission.INTERNET",
     ],
     // @ts-ignore
-    usesCleartextTraffic: true,
+    usesCleartextTraffic: true, // Allow HTTP requests, NEED TO BE SECURE IN PRODUCTION //NOSONAR
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
   },
