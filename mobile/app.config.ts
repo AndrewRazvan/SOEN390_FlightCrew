@@ -17,6 +17,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   ios: {
     supportsTablet: true,
+    infoPlist: {
+      NSAppTransportSecurity: {
+        NSAllowsArbitraryLoads: true, // Allow HTTP requests, NEED TO BE SECURE IN PRODUCTION //NOSONAR
+      },
+    },
     config: {
       googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
     },
@@ -32,6 +37,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         apiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
       },
     },
+    permissions: [
+      "android.permission.ACCESS_COARSE_LOCATION",
+      "android.permission.ACCESS_FINE_LOCATION",
+      "android.permission.INTERNET",
+    ],
+    // @ts-ignore
+    usesCleartextTraffic: true, // Allow HTTP requests, NEED TO BE SECURE IN PRODUCTION //NOSONAR
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
   },

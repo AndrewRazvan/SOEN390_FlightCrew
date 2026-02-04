@@ -1,14 +1,18 @@
 import React, { useRef } from "react";
+import { ActivityIndicator, Platform, Text, View } from "react-native";
 import MapView, {
-  PROVIDER_GOOGLE,
   PROVIDER_DEFAULT,
+  PROVIDER_GOOGLE,
   Region,
 } from "react-native-maps";
-import { Platform, View } from "react-native";
-import styles from "../../styles/GoogleMaps";
+import { MAP_CONFIG } from "../../constants";
 import { campusBoundary } from "../../constants/campusBoundaries";
+import { useBuildingData } from "../../hooks/useBuildingData";
+import styles from "../../styles/GoogleMaps";
+import BuildingMarker from "./BuildingMarker";
 
 export default function GoogleMaps() {
+  const { buildings, loading, error } = useBuildingData();
   const mapRef = useRef<MapView>(null);
   const isCorrectingRef = useRef(false);
 
@@ -57,21 +61,33 @@ export default function GoogleMaps() {
     <View style={styles.container}>
       <MapView
         ref={mapRef}
-        provider={
-          Platform.OS === "android" ? PROVIDER_GOOGLE : PROVIDER_DEFAULT
-        }
-        style={styles.map}
-        initialRegion={{
-          latitude: 45.4971,
-          longitude: -73.579,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
         minZoomLevel={14}
         maxZoomLevel={20}
         onMapReady={handleMapReady}
         onRegionChangeComplete={handleRegionChangeComplete}
-      />
+        provider={
+          Platform.OS === "android" ? PROVIDER_GOOGLE : PROVIDER_DEFAULT
+        }
+        style={styles.map}
+        initialRegion={MAP_CONFIG.concordiaCenter}
+      >
+        {buildings.map((building) => (
+          <BuildingMarker key={building.buildingCode} building={building} />
+        ))}
+      </MapView>
+
+      {loading && (
+        <View style={styles.loadingOverlay}>
+          <ActivityIndicator size="large" color="#8b2020" />
+          <Text style={styles.loadingText}>Loading buildings...</Text>
+        </View>
+      )}
+
+      {error && (
+        <View style={styles.errorOverlay}>
+          <Text style={styles.errorText}>Error: {error}</Text>
+        </View>
+      )}
     </View>
   );
 }
