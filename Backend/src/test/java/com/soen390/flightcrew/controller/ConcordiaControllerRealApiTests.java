@@ -47,14 +47,18 @@ public class ConcordiaControllerRealApiTests {
             System.out.println("Successfully retrieved " + buildings.size() + " buildings from real API.");
 
             // Print the displayPolygon of the 10 first buildings for debugging
-            for (int i = 0; i < Math.min(10, buildings.size()); i++) {
-                Building b = buildings.get(i);
-                System.out.println("Building " + b.getBuildingCode() + " - " + b.getBuildingName() +
-                        " - DisplayPolygon: " +
-                        (b.getGooglePlaceInfo() != null && b.getGooglePlaceInfo().getDisplayPolygon() != null
-                                ? b.getGooglePlaceInfo().getDisplayPolygon()
-                                : "N/A"));
-            }
+            /*
+             * for (int i = 0; i < Math.min(10, buildings.size()); i++) {
+             * Building b = buildings.get(i);
+             * System.out.println("Building " + b.getBuildingCode() + " - " +
+             * b.getBuildingName() +
+             * " - DisplayPolygon: " +
+             * (b.getGooglePlaceInfo() != null && b.getGooglePlaceInfo().getDisplayPolygon()
+             * != null
+             * ? b.getGooglePlaceInfo().getDisplayPolygon()
+             * : "N/A"));
+             * }
+             */
 
             // Verify specific building exists: AD Building at Loyola
             Building adBuilding = buildings.stream()
