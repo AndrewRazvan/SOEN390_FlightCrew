@@ -89,8 +89,6 @@ public class ConcordiaController {
                     if (building.getLatitude() != null && building.getLongitude() != null) {
                         try {
                             // Note: This API call is rate-limited and costs money. Be careful with loops.
-                            // In a real production scenario, we should cache this result or do it in batch
-                            // if possible.
                             GoogleGeocodeResponse googleResponse = googleMapsService
                                     .getBuildingInfo(building.getLatitude(), building.getLongitude());
 
