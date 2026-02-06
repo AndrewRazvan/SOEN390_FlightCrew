@@ -5,7 +5,7 @@ export type CampusId = "SGW" | "LOYOLA";
 export const CAMPUSES: Record<CampusId, Campus> = {
   SGW: {
     id: "SGW",
-    name: "Sir George Williams",
+    name: "SGW Campus",
     shortName: "SGW",
     location: {
       latitude: 45.4953,
@@ -14,7 +14,7 @@ export const CAMPUSES: Record<CampusId, Campus> = {
   },
   LOYOLA: {
     id: "LOY",
-    name: "Loyola",
+    name: "Loyola Campus",
     shortName: "LOY",
     location: {
       latitude: 45.4582,

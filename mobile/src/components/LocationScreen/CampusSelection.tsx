@@ -1,14 +1,14 @@
 import Entypo from "@expo/vector-icons/Entypo";
 import React, { useState } from "react";
 import { Pressable, Text, View } from "react-native";
+import { CAMPUSES, CampusId } from "../../constants/campuses";
 import styles from "../../styles/CampusSelection";
 
-const CAMPUSES = ["SGW Campus", "Loyola Campus"] as const;
-type Campus = (typeof CAMPUSES)[number];
-
 interface CampusSelectionProps {
-  onCampusChange?: (campus: Campus) => void;
+  onCampusChange?: (campus: CampusId) => void;
 }
+
+const campusIds = Object.keys(CAMPUSES) as CampusId[];
 
 export default function CampusSelection({
   onCampusChange,
@@ -16,12 +16,12 @@ export default function CampusSelection({
   const [campusIndex, setCampusIndex] = useState(0);
 
   const isFirst = campusIndex === 0;
-  const isLast = campusIndex === CAMPUSES.length - 1;
+  const isLast = campusIndex === campusIds.length - 1;
 
   const navigate = (direction: -1 | 1) => {
     const newIndex = campusIndex + direction;
     setCampusIndex(newIndex);
-    onCampusChange?.(CAMPUSES[newIndex]);
+    onCampusChange?.(campusIds[newIndex]);
   };
 
   return (
@@ -44,7 +44,9 @@ export default function CampusSelection({
         />
       </Pressable>
 
-      <Text style={styles.campusText}>{CAMPUSES[campusIndex]}</Text>
+      <Text style={styles.campusText}>
+        {CAMPUSES[campusIds[campusIndex]].name}
+      </Text>
 
       <Pressable
         onPress={() => navigate(1)}
