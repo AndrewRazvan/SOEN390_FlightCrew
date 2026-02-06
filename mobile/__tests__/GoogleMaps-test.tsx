@@ -36,6 +36,12 @@ jest.mock("../src/hooks/useBuildingData", () => ({
   useBuildingData: () => mockUseBuildingData(),
 }));
 
+// Mock useCurrentLocation hook so tests aren't blocked by location loading
+const mockUseCurrentLocation = jest.fn();
+jest.mock("../src/hooks/useCurrentLocation", () => ({
+  useCurrentLocation: () => mockUseCurrentLocation(),
+}));
+
 const mockBuildings: Building[] = [
   {
     campus: "SGW",
@@ -62,6 +68,11 @@ beforeEach(() => {
   jest.clearAllMocks();
   mockUseBuildingData.mockReturnValue({
     buildings: [],
+    loading: false,
+    error: null,
+  });
+  mockUseCurrentLocation.mockReturnValue({
+    location: null,
     loading: false,
     error: null,
   });
@@ -101,7 +112,7 @@ test("renders error message when error occurs", () => {
 
   render(<GoogleMaps />);
 
-  expect(screen.getByText("Error: Failed to fetch buildings")).toBeTruthy();
+  expect(screen.getByText("Failed to fetch buildings")).toBeTruthy();
 });
 
 test("renders building markers for each building", () => {
