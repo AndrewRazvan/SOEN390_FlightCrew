@@ -1,4 +1,3 @@
-import { expect, jest, test } from "@jest/globals";
 import { act, render, screen, userEvent } from "@testing-library/react-native";
 
 import CampusSelection from "../src/components/LocationScreen/CampusSelection";
