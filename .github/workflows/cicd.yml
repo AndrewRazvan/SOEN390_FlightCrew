@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main, dev, "feat/**"]
 
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
 jobs:
   backend-test:
     runs-on: ubuntu-latest
