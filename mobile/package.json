@@ -8,7 +8,7 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "expo lint --fix && npx tsc --noEmit",
     "lint:ci": "expo lint && npx tsc --noEmit"
   },
@@ -19,7 +19,8 @@
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/jest/setup.ts"
-    ]
+    ],
+    "coverageReporters": ["json-summary", "text", "lcov"]
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",
