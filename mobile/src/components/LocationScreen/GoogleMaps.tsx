@@ -15,7 +15,9 @@ interface GoogleMapsProps {
   mapRef: React.RefObject<MapView | null>;
 }
 
-export default function GoogleMaps({ mapRef }: GoogleMapsProps) {
+export default function GoogleMaps({
+  mapRef,
+}: Readonly<GoogleMapsProps>): React.ReactElement {
   const { buildings, loading, error } = useBuildingData();
   const isCorrectingRef = useRef(false);
 
