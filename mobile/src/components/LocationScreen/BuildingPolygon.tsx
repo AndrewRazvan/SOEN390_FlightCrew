@@ -8,17 +8,21 @@ interface BuildingPolygonProps {
 }
 
 export default function BuildingPolygon({ building }: BuildingPolygonProps) {
-  if (!building.polygon || building.polygon.length === 0) {
+  if (!building.polygons || building.polygons.length === 0) {
     return null;
   }
 
   return (
-    <Polygon
-      coordinates={building.polygon}
-      strokeColor={COLORS.concordiaMaroon}
-      fillColor="rgba(156, 45, 45, 0.3)" // Transparent maroon
-      strokeWidth={2}
-      tappable={true}
-    />
+    <>
+      {building.polygons.map((polygonCoords, index) => (
+        <Polygon
+          key={`${building.buildingCode}-${index}`}
+          coordinates={polygonCoords}
+          strokeColor={COLORS.concordiaMaroon}
+          fillColor="rgba(156, 45, 45, 0.3)" // Transparent maroon
+          strokeWidth={2}
+        />
+      ))}
+    </>
   );
 }

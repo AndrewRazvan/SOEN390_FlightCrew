@@ -13,6 +13,9 @@ public class GoogleGeocodeRequest {
     @JsonProperty("locationQuery")
     private LocationQuery locationQuery;
 
+    @JsonProperty("addressQuery")
+    private AddressQuery addressQuery;
+
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -30,5 +33,13 @@ public class GoogleGeocodeRequest {
 
         @JsonProperty("longitude")
         private Double longitude;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class AddressQuery {
+        @JsonProperty("addressQuery")
+        private String addressQuery;
     }
 }

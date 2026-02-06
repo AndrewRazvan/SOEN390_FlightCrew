@@ -86,7 +86,7 @@ public class ConcordiaController {
             List<Building> buildings = response.getBody();
             if (buildings != null) {
                 for (Building building : buildings) {
-                    if (building.getLatitude() != null && building.getLongitude() != null) {
+                    if (building.getAddress() != null) {
                         try {
                             // Note: This API call is rate-limited and costs money. Be careful with loops.
                             GoogleGeocodeResponse googleResponse = googleMapsService
@@ -94,7 +94,30 @@ public class ConcordiaController {
 
                             if (googleResponse != null && googleResponse.getDestinations() != null
                                     && !googleResponse.getDestinations().isEmpty()) {
-                                building.setGooglePlaceInfo(googleResponse.getDestinations().get(0).getPrimary());
+
+                                GoogleGeocodeResponse.PrimaryPlace bestMatch = googleResponse.getDestinations().get(0)
+                                        .getPrimary();
+                                String targetName = building.getBuildingLongName() != null
+                                        ? building.getBuildingLongName()
+                                        : building.getBuildingName();
+
+                                for (GoogleGeocodeResponse.Destination dest : googleResponse.getDestinations()) {
+                                    if (dest.getPrimary() != null && dest.getPrimary().getDisplayName() != null
+                                            && targetName != null) {
+                                        String destName = dest.getPrimary().getDisplayName().getText();
+                                        if (destName.toLowerCase().contains(targetName.toLowerCase()) ||
+                                                targetName.toLowerCase().contains(destName.toLowerCase())) {
+                                            bestMatch = dest.getPrimary();
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if (bestMatch != null && bestMatch.getDisplayName() != null) {
+                                    System.out.println("Match Selected: '" + targetName +
+                                            "' matched with: '" + bestMatch.getDisplayName().getText() + "'");
+                                }
+                                building.setGooglePlaceInfo(bestMatch);
                             }
                         } catch (Exception e) {
                             // Log error but continue with other buildings
@@ -117,4 +140,5 @@ public class ConcordiaController {
             throw new RuntimeException("Failed to fetch building list: " + e.getMessage());
         }
     }
+
 }

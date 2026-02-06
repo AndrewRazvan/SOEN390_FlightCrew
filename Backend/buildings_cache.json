@@ -1006,8 +1006,8 @@
         "coffee_shop",
         "cafe",
         "food_store",
-        "point_of_interest",
         "food",
+        "point_of_interest",
         "store",
         "establishment"
       ],
@@ -1520,8 +1520,8 @@
       "primaryType": "gym",
       "types": [
         "gym",
-        "sports_activity_location",
         "health",
+        "sports_activity_location",
         "point_of_interest",
         "establishment"
       ],
@@ -2174,7 +2174,7 @@
         "languageCode": "en"
       },
       "primaryType": null,
-      "types": ["farm", "school", "point_of_interest", "establishment"],
+      "types": ["school", "farm", "point_of_interest", "establishment"],
       "formattedAddress": "Sankofa Farming Cooperative - Coopérative Sankofa, 7075 Rue de Terrebonne, Montreal, QC H4B 2Z3, Canada",
       "structureType": "POINT",
       "location": { "latitude": 45.4600341, "longitude": -73.6408462 },
