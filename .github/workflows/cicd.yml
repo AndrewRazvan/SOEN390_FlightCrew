@@ -112,7 +112,9 @@ jobs:
         run: npm ci
 
       - name: Run backend tests with coverage
-        run: mvn test
+        run: |
+          mvn verify
+          mvn dependency:copy-dependencies -DoutputDirectory=target/dependency
         working-directory: ./Backend
         env:
           EXTERNAL_API_KEY: ${{ secrets.CONCORDIA_API_KEY }}
